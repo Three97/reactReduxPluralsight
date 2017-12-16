@@ -10,7 +10,7 @@ class ManageCoursePage extends React.Component {
     super(props, context);
 
     this.state = {
-      course: Object.assign({}, this.props.course),
+      course: Object.assign({}, props.course),
       errors: {}
     };
 
@@ -19,7 +19,7 @@ class ManageCoursePage extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // runs everytime - doesn't know if props have changed, so check first
+    // runs every time - doesn't know if props have changed, so check first
     if (this.props.course.id !== nextProps.course.id) {
       // Necessary to populate form when existing course is loaded directly
       this.setState({course: Object.assign({}, nextProps.course)});
@@ -30,7 +30,7 @@ class ManageCoursePage extends React.Component {
     // by convention, each form field has a name - on the event.target object
     // use that convention to simplify the event handler (onChange in this case)
     const field = event.target.name;
-    let course = this.state.course;
+    let course = Object.assign({}, this.state.course);
     course[field] = event.target.value;
     return this.setState({course: course});
   }
